@@ -46,6 +46,14 @@ $(function(){
         },
         getRecord: function(name) {
             return JSON.parse(localStorage.attendance)[name];
+        },
+        getNames: function() {
+            var attendance = JSON.parse(localStorage.attendance),
+            names = [];
+            $.each(attendance, function(name){
+            	names.push(name);
+            }); 
+            return names
         }
     };
 
@@ -60,14 +68,17 @@ $(function(){
     	getNumDays: function() {
             return DAYS;
     	},
-    	getAllDays: function() {
-    		model.getAll();
+    	getAttendance: function() {
+    		return model.getAll();
+    	},
+    	getStudentNames: function() {
+    		return model.getNames();
     	}
     };
 
     function createRowElem(tx, tClass) {
     	var elem = document.createElement(tx);
-        elem.class = tClass;
+        elem.className = tClass;
         if ((tx === 'td') && (tClass === 'attend-col')) {
             var input = document.createElement('input');
     	    input.type = 'checkbox';
@@ -78,7 +89,7 @@ $(function(){
 
     function getTableColElem(tx, columnClass, numRows, rowClass) {
         var elem = document.createElement('tr');
-        elem.class = columnClass;
+        elem.className = columnClass;
  
         elem.appendChild(createRowElem(tx, rowClass[0]));
         for (var i = 0; i < numRows; i++) {
@@ -96,8 +107,7 @@ $(function(){
     		this.numCols = octopus.getNumStudents();
     		this.rowClass = ["name-col", "attend-col", "missed-col"];
     		this.columnClass = { "th": "t-header", "td": "student"};
-
-            tableView.render();
+    		tableView.render();
 
     	},
     	render: function() {
@@ -107,8 +117,23 @@ $(function(){
                 this.tableBodyElem.appendChild(elem);
             }
 
-            var students = $('tbody .name-col');
-        
+            $('thead .name-col').text('Student Name');
+
+            var $headAttendCol = $('thead .attend-col');
+            $headAttendCol.each(function(e) {
+            	$(this).text(e+1);
+            })
+
+            $('thead .missed-col').text('Days Missed');
+
+            var names = octopus.getStudentNames();
+            var studentRows = $('tbody .student');
+          	studentRows.each(function() {
+                $(this).children('.name-col').text(names.shift());
+            });
+
+           
+       
     	}
     };
 
