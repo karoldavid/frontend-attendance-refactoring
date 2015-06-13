@@ -73,6 +73,9 @@ $(function(){
     	},
     	getStudentNames: function() {
     		return model.getNames();
+    	},
+    	updateData: function(newData) {
+    		localStorage.attendance = JSON.stringify(newData);
     	}
     };
 
@@ -138,9 +141,9 @@ $(function(){
             	var studentRow = $('tbody .name-col:contains("' + name + '")').parent('tr'),
             	dayChecks = $(studentRow).children('.attend-col').children('input');
 
-               dayChecks.each(function(i) {
+                dayChecks.each(function(i) {
                    $(this).prop('checked', days[i]);
-               });
+                });
             });
 
             var $allMissed = $('tbody .missed-col');
@@ -176,7 +179,7 @@ $(function(){
                     });
                 });
                 countMissing();
-                localStorage.attendance = JSON.stringify(newAttendance);
+                octopus.updateData(newAttendance);
             });
             countMissing();
     	}
