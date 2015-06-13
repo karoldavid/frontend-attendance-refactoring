@@ -1,24 +1,5 @@
 $(function(){
 
-    var data = {
-    	"students": [
-    	{
-         	"name": "Slappy the Frog"
-        },
-    	{
-    		"name": "Lilly the Lizard"
-    	},
-    	{
-    		"name": "Paulrus the Walrus"
-        },
-        {
-    	    "name": "Gregory the Goat"
-    	},
-        {
-    	    "name":  "Adam the Anaconda"
-    	}
-    ]};
-
     var DAYS = 12;
 
 	function getRandom() {
@@ -60,7 +41,8 @@ $(function(){
     var octopus = {
     	init: function() {
     		model.init();
-    		tableView.init();
+    		tableCreateView.init();
+    		tableUpdateView.init();
     	},
     	getNumStudents: function() {
             return data.students.length;
@@ -102,7 +84,7 @@ $(function(){
     	return elem;
     }
 
-    var tableView = {
+    var tableCreateView = {
     	init: function() {
     		this.tableHeadElem = document.getElementById('table-head');
     		this.tableBodyElem = document.getElementById('table-body');
@@ -110,7 +92,7 @@ $(function(){
     		this.numCols = octopus.getNumStudents();
     		this.rowClass = ["name-col", "attend-col", "missed-col"];
     		this.columnClass = { "th": "t-header", "td": "student"};
-    		tableView.render();
+    		tableCreateView.render();
 
     	},
     	render: function() {
@@ -145,8 +127,19 @@ $(function(){
                    $(this).prop('checked', days[i]);
                 });
             });
+    	}
+    };
 
-            var $allMissed = $('tbody .missed-col');
+    var tableUpdateView = {
+        init: function() {
+            tableUpdateView.render();
+        },
+        render: function() {
+
+        	var $allMissed = $('tbody .missed-col'),
+        	    $allMissed = $('tbody .missed-col'),
+                $allCheckboxes = $('tbody input');
+
             function countMissing() {
             	$allMissed.each(function() {
             	    var studentRow = $(this).parent('tr'),
@@ -160,9 +153,6 @@ $(function(){
                     $(this).text(numMissed);
                 });
             }
-            
-            var  $allMissed = $('tbody .missed-col'),
-                 $allCheckboxes = $('tbody input');
 
             $allCheckboxes.on('click', function() {
                 var studentRows = $('tbody .student'),
@@ -182,7 +172,9 @@ $(function(){
                 octopus.updateData(newAttendance);
             });
             countMissing();
-    	}
+
+        }
     };
+
     octopus.init();
 });
