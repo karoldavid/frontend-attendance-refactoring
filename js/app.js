@@ -22,8 +22,8 @@ $(function(){
     var DAYS = 12;
 
 	function getRandom() {
-            return (Math.random() >= 0.5);
-        }
+		return (Math.random() >= 0.5);
+	}
 
     var model = {
 	    init: function() {
@@ -59,6 +59,9 @@ $(function(){
     	},
     	getNumDays: function() {
             return DAYS;
+    	},
+    	getAllDays: function() {
+    		model.getAll();
     	}
     };
 
@@ -103,6 +106,9 @@ $(function(){
     			var elem = getTableColElem("td", this.columnClass["td"], this.numRows, this.rowClass);
                 this.tableBodyElem.appendChild(elem);
             }
+
+            var students = $('tbody .name-col');
+        
     	}
     };
 
