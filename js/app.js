@@ -88,10 +88,11 @@ $(function(){
     	init: function() {
     		this.tableHeadElem = document.getElementById('table-head');
     		this.tableBodyElem = document.getElementById('table-body');
-    		this.numRows = octopus.getNumDays();
-    		this.numCols = octopus.getNumStudents();
     		this.rowClass = ["name-col", "attend-col", "missed-col"];
     		this.columnClass = { "th": "t-header", "td": "student"};
+    		this.numRows = octopus.getNumDays();
+    		this.numCols = octopus.getNumStudents();
+
     		tableCreateView.render();
 
     	},
@@ -132,12 +133,12 @@ $(function(){
 
     var tableUpdateView = {
         init: function() {
+
             tableUpdateView.render();
         },
         render: function() {
 
         	var $allMissed = $('tbody .missed-col'),
-        	    $allMissed = $('tbody .missed-col'),
                 $allCheckboxes = $('tbody input');
 
             function countMissing() {
@@ -172,7 +173,6 @@ $(function(){
                 octopus.updateData(newAttendance);
             });
             countMissing();
-
         }
     };
 
