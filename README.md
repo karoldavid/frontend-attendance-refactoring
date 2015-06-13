@@ -1,11 +1,17 @@
-udacity-frontend-attendance
+Udacity-Frontend-Attendance
 ===========================
 
-Notes:
+# Udacity-Frontend-Attendance
 
-No VMC
-Does not create tables dynamically based on student names array
-Grabs Changes in Select Boxes from all Checkboxes
-Calculates all Values after Change
+## Refacoring Code
 
+## Here is a link to the live version:
+http://karoldavid.github.io/frontend-attendance-refactoring/
+
+### The Frontend-Attendance is part of the Udacity JavaScript Design Patterns Course:
+https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3437288625/m-3427998730
+
+### The repo was pulled from:
+
+#### You can email me at: k.zysk@zoho.com
 
