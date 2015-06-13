@@ -54,6 +54,9 @@ $(function(){
             	names.push(name);
             }); 
             return names
+        },
+        update: function(data) {
+            localStorage.attendance = JSON.stringify(data);
         }
     };
 
@@ -75,7 +78,7 @@ $(function(){
     		return model.getNames();
     	},
     	updateData: function(newData) {
-    		localStorage.attendance = JSON.stringify(newData);
+    		model.update(newData);
     	}
     };
 
