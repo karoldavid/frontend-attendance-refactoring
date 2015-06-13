@@ -44,9 +44,6 @@ $(function(){
         getAll: function() {
         	return JSON.parse(localStorage.attendance);
         },
-        getRecord: function(name) {
-            return JSON.parse(localStorage.attendance)[name];
-        },
         getNames: function() {
             var attendance = JSON.parse(localStorage.attendance),
             names = [];
