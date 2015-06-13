@@ -30,9 +30,7 @@ $(function(){
 		    if (!localStorage.attendance) {
 		    	console.log('Creating attendance records...');
                 var attendance = {};
-                attendance.days = DAYS;
-                attendance.numStudents = data.students.length;
-                for (var i = 0; i < attendance.numStudents; i++) {
+                for (var i = 0; i < data.students.length; i++) {
             	    var name = data.students[i].name;
             	    attendance[name] = [];
 
@@ -54,16 +52,8 @@ $(function(){
             }); 
             return names;
         },
-        days: function() {
-        	return JSON.parse(localStorage.attendance).days;
-        },
-        getLength: function() {
-        	return JSON.parse(localStorage.attendance).numStudents;
-        },
-        update: function(data) {
-        	data.days = DAYS;
-            data.numStudents = data.students.length;
-            localStorage.attendance = JSON.stringify(data);
+        update: function(attendance) {
+            localStorage.attendance = JSON.stringify(attendance);
         }
     };
 
@@ -73,10 +63,10 @@ $(function(){
     		tableView.init();
     	},
     	getNumStudents: function() {
-            return model.getLength();
+            return data.students.length;
     	},
     	getNumDays: function() {
-            return model.days();
+            return DAYS;
     	},
     	getAttendance: function() {
     		return model.getAll();
@@ -120,7 +110,6 @@ $(function(){
     		this.numCols = octopus.getNumStudents();
     		this.rowClass = ["name-col", "attend-col", "missed-col"];
     		this.columnClass = { "th": "t-header", "td": "student"};
-
     		tableView.render();
 
     	},
